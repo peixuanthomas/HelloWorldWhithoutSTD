@@ -24,7 +24,15 @@ extern ssize_t write(int fd, const void* buf, size_t count);
 #endif
 
 int main() {
-    const char* message = "Hello World!\n";
+#if defined(_WIN32)
+    const char* message = "hello world from windows\n";
+#elif defined(__linux__)
+    const char* message = "hello world from linux\n";
+#elif defined(__APPLE__)
+    const char* message = "hello world from OSX\n";
+#else
+    const char* message = "hello world from unknown\n";
+#endif
     DWORD written;
 
     // 计算字符串长度
